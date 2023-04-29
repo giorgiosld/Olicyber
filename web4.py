@@ -1,8 +1,8 @@
 import requests
 
-URL  = "http://web-03.challs.olicyber.it/flag"
+URL  = "http://web-04.challs.olicyber.it/users"
 
-header = {'X-Password': 'admin'}
+header = {'Accept': 'application/xml'}
 r = requests.get(URL, headers=header)
 
 print(r.text)
