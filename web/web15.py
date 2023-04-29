@@ -10,4 +10,3 @@ links = soup.find_all('link')
 scripts = soup.find_all('script')
 print(links)
 print(scripts)
-#to finish
