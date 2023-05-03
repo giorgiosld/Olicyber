@@ -67,5 +67,6 @@ while True:
             break
     else:
         break
-    
-print(bytes.fromhex(result))
+print(f"Flag found ---> {result}")
+print(f"Starting decoding flag from hex to str...")
+print(bytes.fromhex(result).decode('utf-8'))
